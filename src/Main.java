@@ -3,7 +3,12 @@ public class Main {
         // Unit Test for Cash class
 
         // Test setup
-        Exchange exchange = new NYSE("someAccessKey");
+        Exchange exchange = new Exchange(){
+            @Override
+            public float rate(String origin, String target) {
+                return origin.equals("USD") && target.equals("Euro") ? 0.85f : 1.0f;
+            }
+        };
         Cash dollar = new Cash(exchange, 100);
         System.out.println("Dollar: " + dollar.toString());
 
